@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include palfingercraft *.css
+recursive-include palfingercraft *.csv
+recursive-include palfingercraft *.html
+recursive-include palfingercraft *.ico
+recursive-include palfingercraft *.js
+recursive-include palfingercraft *.json
+recursive-include palfingercraft *.md
+recursive-include palfingercraft *.png
+recursive-include palfingercraft *.py
+recursive-include palfingercraft *.svg
+recursive-include palfingercraft *.txt
+recursive-exclude palfingercraft *.pyc
