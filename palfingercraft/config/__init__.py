@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import frappe
+from frappe import _
 __version__ = '0.0.1'
 
 
@@ -31,6 +32,7 @@ def get_data_sell(datasell=datasell):
                     row['items'].remove(rowitem)
                 if 'Sales Order Trends' in rowitem['name']:
                     row['items'].remove(rowitem)
+            
         if row['label'] == 'Other Reports':
             datasell.remove(row)      #Remove other reports Section
         if row['label'] == 'Sales':
@@ -39,7 +41,14 @@ def get_data_sell(datasell=datasell):
                     row['items'].remove(rowitem)
                 if 'Blanket Order' in rowitem['name']:
                     row['items'].remove(rowitem)
+            
 
+                    row['items'].append({
+                                       "type": "doctype",
+                                       "name": "Estimation Sheet",
+                                       "description": _("Estimation Sheet"),
+                                       "onboard": 1,
+                               })
     return datasell
 selling.get_data = get_data_sell
 
@@ -113,12 +122,42 @@ def get_data_proj(dataproj=dataproj):
                    row['items'].remove(rowitem)
                if rowitem['name'] == "Project Update":
                    row['items'].remove(rowitem)
+                   row['items'].append({                                
+                                        "type": "doctype",
+                                        "name": "Machinery and Other Cost",
+                                        "description": _("Machinery and Other Cost"),
+                                        "onboard": 1,
+                                })
+                   row['items'].append({
+                                        "type": "doctype",
+                                        "name": "Project Timesheet",
+                                        "label": _("Project Time Sheet"),
+                                        "onboard": 1,
+                                })
+                   row['items'].append({                                
+                                        "type": "doctype",
+                                        "name": "Employee Allocation",
+                                        "label": _("Employee Allocation")
+                     
+                                })
+                   row['items'].append({                                
+                                        "type": "doctype",
+                                        "name": "Employee Allocation Tool",
+                                        "label": _("Employee Allocation Tool")
+                                })
+
+
+
+
         if row['label'] == 'Reports':
            for rowitem in row['items']:
                if rowitem['name'] == "Project wise Stock Tracking":
                    row['items'].remove(rowitem)
                if rowitem['name'] == "Project Billing Summary":
                    row['items'].remove(rowitem)
+
+
+
 
     return dataproj
 projects.get_data = get_data_proj
